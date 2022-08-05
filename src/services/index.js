@@ -3,7 +3,6 @@ import { baseUrl } from '../config';
 
 export const getTopicsService = async (topic) => {
 
-    console.log(">>> process.env: ", process.env);
     const options = {
         headers: {
             "content-type": 'application/json',

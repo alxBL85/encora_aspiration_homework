@@ -13,7 +13,7 @@ A click on a topic should display the topics related to that topic, and how many
 
 There should also be Search capability to search/query on any term or topic.
 
-¬†You shouldimplement best practices with the UI.
+You should implement best practices with the UI.
 To interact with the Github GraphQL API you'll need to have
 * a [Github API key](https://docs.github.com/en/free-pro-team@latest/graphql/guides/forming-calls
 -with-graphql#authenticating-with-graphql)
@@ -59,13 +59,17 @@ Feel free to elaborate on how you would improve any of the following topics
 1. Node Js: 10.19.0
 1. NPM: 6.14.4
 
-You can download the source code directly from Github (https://github.com/alxBL85/Avantica_NuOrder_TakeHome.git) downloading the source code or via the command line:
+You can download the source code directly from Github (https://github.com/alxBL85/encora_aspiration_homework.git) downloading the source code or via the command line:
 
-> git clone https://github.com/alxBL85/Avantica_NuOrder_TakeHome.git
+> git clone https://github.com/alxBL85/encora_aspiration_homework.git
 
 Once, downloaded, you must install the required modules:
 
 > npm install
+
+Create an .env file with your Github Personal Access Token:
+
+> GITHUB_PERSONAL_ACCESS_TOKEN
 
 After successfully download and install the dependencies, you can run the application:
 
