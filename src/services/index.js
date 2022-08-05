@@ -3,10 +3,11 @@ import { baseUrl } from '../config';
 
 export const getTopicsService = async (topic) => {
 
+    console.log(">>> process.env: ", process.env);
     const options = {
         headers: {
             "content-type": 'application/json',
-            "Authorization": 'bearer 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'
+            "Authorization": `bearer ${process.env.GITHUB_PERSONAL_ACCESS_TOKEN}`
             
         },
     };
