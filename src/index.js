@@ -6,6 +6,7 @@ import store from './store/index';
 import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
 require('dotenv').config();
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store} >

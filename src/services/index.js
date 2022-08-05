@@ -3,11 +3,10 @@ import { baseUrl } from '../config';
 
 export const getTopicsService = async (topic) => {
 
-    const auth = process.env?.GITHUB_PERSONAL_ACCESS_TOKEN ?? "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";
     const options = {
         headers: {
             "content-type": 'application/json',
-            "Authorization": `bearer ${auth}`
+            "Authorization": `bearer ${process.env?.REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN}`
             
         },
     };
