@@ -1,5 +1,6 @@
 body {
-   background-color: #004466;   
+   background-color: #004466;  
+   overflow: hidden; 
 }
 
 .appContainer {
