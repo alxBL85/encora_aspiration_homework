@@ -5,12 +5,24 @@ import App from './App';
 import store from './store/index';
 import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 require('dotenv').config();
+
+
+const apolloClient = new ApolloClient({
+uri: 'https://api.github.com/graphql',
+cache: new InMemoryCache(),
+headers: {
+  authorization: `bearer ${process.env?.REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN}`,
+}
+});
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store} >
-    <App />
+      <ApolloProvider client={apolloClient}>
+      <App />
+      </ApolloProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

@@ -1,46 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import ErrorDialog from './ErrorDialog/index';
 import {DebounceInput} from 'react-debounce-input';
-
-import {
-  getError, // Selector
-  getRelatedTopics, // Selector
-  getStargazerCount, // Action
-  getTopic, // Selector
-  isLoading, 
-  requestTopicsThunk
-} from '../slice/githubSlice';
+import { useQuery } from '@apollo/client';
+import GET_TOPICS from '../graphql/queries/topics';
+import RelatedTopics from './RelatedTopics';
 
 import { LinearProgress } from '@material-ui/core';
 import '../styles/body.css';
-import RelatedTopics from './RelatedTopics';
 
 const Body = () => {
 
-  const dispatch = useDispatch();
-
-  // ------------ SELECTORS ---------------------------
-  
-  const topic = useSelector(getTopic);
-  const stargazerCount = useSelector(getStargazerCount);
-  const relatedTopics = useSelector(getRelatedTopics);
-  const loading = useSelector(isLoading);
-  const error = useSelector(getError);
-  
+ 
   // ------------ LOCAL STATE -------------------------
   
   const [localTopic, setLocalTopic] = useState('react');
   const [showErrorDialog, setShowErrorDialog] = useState(false);
 
+  // ------------ GRAPHQL QUERIES ---------------------
+
+  const apolloQuery = useQuery(GET_TOPICS, {variables: {topic: localTopic}});
+
+  const { loading, error } = apolloQuery;
+  
+
   // ------------ EFFECTS -----------------------------
 
   useEffect(()=>{
-   dispatch(requestTopicsThunk(localTopic));
-  }, [localTopic]);
-
-  useEffect(()=>{
+    if(error) {
     setShowErrorDialog(error !== '');
+    }
   }, [error])
   
   // ------------ EVENT HANDLERS ----------------------
@@ -67,18 +55,19 @@ const Body = () => {
     setLocalTopic(rTopicName);
   }
   
-// ---------------------  RENDER --------------------------------------------
+// ---------------------  RENDER -------------------------------------------- 
 
- return (<div className='bodyContainer'>    
+ return ( 
+    <div className='bodyContainer'>    
     
     <ErrorDialog isOpen={showErrorDialog} message={error} handleClose = {handleCloseErrorDialog} />
 
-    <form className="inputSearch" noValidate autoComplete="off" onSubmit={handleSubmit} style={{backgroundColor: 'lightsalmon'}}>  
-    <span className="inputLabel">Search Topics with Redux Thunks and GraphQL</span>
+    <form className="inputSearch" noValidate autoComplete="off" onSubmit={handleSubmit} style={{backgroundColor:'lightyellow'}}>  
+    <span className="inputLabel">Search Topics with Apollo and GraphQL</span>
     <DebounceInput 
       className="inputTextField"
       minLength={2} 
-      debounceTimeout={300} 
+      debounceTimeout={500} 
       onChange={handleInputChange} 
       value={localTopic} 
       label="Search Topics"
@@ -87,12 +76,13 @@ const Body = () => {
       {loading && <LinearProgress /> }
     </form>
 
+
     {!loading && <RelatedTopics 
     onClickTopicHandler={onClickTopicHandler} 
-    topic={topic} 
-    stargazerCount={stargazerCount} 
-    relatedTopics={relatedTopics} />
-    }
+    topic={apolloQuery.data.topic.name} 
+    stargazerCount={apolloQuery.data.topic.stargazerCount}
+    relatedTopics = {apolloQuery.data.topic.relatedTopics}
+    />}
   </div>
  );   
 }
