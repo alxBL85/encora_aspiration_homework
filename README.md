@@ -51,13 +51,33 @@ Feel free to elaborate on how you would improve any of the following topics
 
 
 -----
-## Installment:
+## Extras:
 
-### Requirements:
+1. I have included an alternate version of this excercise using Redux Thunks for async actions (as a demo) for comparision
 
-1. Github CLI: 2.25
-1. Node Js: 10.19.0
-1. NPM: 6.14.4
+## Future Enhancements:
+
+1. In future versions, it should be interesting to include Mutations with GraphQL or more complex escenarios to render more data.
+
+
+### Dependencies:
+
+1. @apollo/client: ^3.6.9,
+1. @material-ui/core: ^4.11.3,
+1. @material-ui/lab: ^4.0.0-alpha.57,
+1. @reduxjs/toolkit: ^1.8.3,
+1. @testing-library/jest-dom: ^5.12.0,
+1. @testing-library/react: ^11.2.6,
+1. @testing-library/user-event: ^12.8.3,
+1. axios: ^0.21.4,
+1. dotenv: ^16.0.1,
+1. graphql: ^16.5.0,
+1. react: ^17.0.2,
+1. react-debounce-input: ^3.3.0,
+1. react-dom: ^17.0.2,
+1. react-redux: ^7.2.4,
+1. react-scripts: 4.0.3,
+1. web-vitals: ^1.1.1
 
 You can download the source code directly from Github (https://github.com/alxBL85/encora_aspiration_homework.git) downloading the source code or via the command line:
 
